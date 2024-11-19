@@ -10,8 +10,12 @@ Liner::~Liner()
 {
 }
 
+void Liner::Update()
+{
+}
+
 void Liner::Render(HDC hdc)
 {
 	MoveToEx(hdc, _start.x, _start.y, nullptr);
-	LineTo(hdc, _end.y, _end.y);
+	LineTo(hdc, _end.x, _end.y);
 }

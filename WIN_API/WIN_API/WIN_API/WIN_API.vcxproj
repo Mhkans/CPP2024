@@ -137,8 +137,12 @@
     <ClInclude Include="Contents\Objects\Liner.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Contents\Objects\RectangleCollider.h" />
+    <ClInclude Include="Scenes\PaintScene.h" />
+    <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Types.h" />
     <ClInclude Include="WIN_API.h" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="Contents\Objects\Liner.cpp" />
     <ClCompile Include="Contents\Objects\RectangleCollider.cpp" />
+    <ClCompile Include="Scenes\PaintScene.cpp" />
+    <ClCompile Include="Program\Program.cpp" />
+    <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="WIN_API.cpp" />
   </ItemGroup>
   <ItemGroup>

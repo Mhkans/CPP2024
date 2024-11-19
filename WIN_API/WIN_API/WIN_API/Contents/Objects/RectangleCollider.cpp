@@ -1,21 +1,20 @@
 #include "framework.h"
 #include "RectangleCollider.h"
 
-RectangleCollider::RectangleCollider(Vector start, int length, int height)
-	:_start(start)
+RectangleCollider::RectangleCollider(Vector center, Vector size)
+	: _center(center), _halfSize(size * 0.5f)
 {
-	_length = length;
-	_height = height;
 }
 
 RectangleCollider::~RectangleCollider()
 {
 }
 
+void RectangleCollider::Update()
+{
+}
+
 void RectangleCollider::Render(HDC hdc)
 {
-	Vector end;
-	end.x = _start.x + _length;
-	end.y = _start.y + _height;
-	Rectangle(hdc, _start.x, _start.y, end.x, end.y);
+	Rectangle(hdc, Left(), Top(), Right(), Bottom());
 }

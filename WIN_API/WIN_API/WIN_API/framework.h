@@ -19,8 +19,12 @@
 #include<unordered_map>
 #include<algorithm>
 #include<string>
+
+
+
 using namespace std;
 
+#include"Types.h"
 //math 
 #include<math/Vector.h>
 
@@ -28,3 +32,13 @@ using namespace std;
 #include "Contents/Objects/CircleCollider.h"
 #include "Contents/Objects/RectangleCollider.h"
 #include "Contents/Objects/Liner.h"
+
+//scene
+#include"Scenes/Scene.h"
+#include"Scenes/PaintScene.h"
+
+//program
+#include"Program/Program.h"
+
+
+extern Vector mousePos;

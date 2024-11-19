@@ -145,14 +145,34 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 // 
 //message 
 
-shared_ptr<CircleCollider> myCircle = make_shared<CircleCollider>(Vector(200,200),70);
-shared_ptr<Liner> myLine = make_shared<Liner>(Vector(300,300),Vector(400,400));
-shared_ptr<RectangleCollider> myRect = make_shared<RectangleCollider>(Vector(500,500),100,100);
+
+
+Vector mousePos;
+
+
+shared_ptr<Program> program = make_shared<Program>();
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE: {
+        SetTimer(hWnd, 1, 1, nullptr); // 1ms마다 WM_TIMER 메세지 처리하도록 명령
+        break;
+    }
+    case WM_TIMER:
+    {
+        program->Update();
+        InvalidateRect(hWnd, nullptr, true); 
+        break;
+    }
+    case WM_MOUSEMOVE: { //마우스가 움직일때마다 처리되는 메세지
+
+        mousePos.x = static_cast<float>(LOWORD(lParam));//현재 마우스의픽셀
+        mousePos.y = static_cast<float>(HIWORD(lParam));
+
+        break;
+    }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -174,17 +194,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            
-            //타원
-            //Ellipse(hdc,0,0,100,100);//픽셀에는 소수점이 없으므로 int형 
-            myCircle->Render(hdc);
-            //사각형
-            //Rectangle(hdc, 0, 0, 100, 100); //그리는 순서에 따라 덮어씌워질 수 있다.
-            myRect->Render(hdc);
-            //선
-            //MoveToEx(hdc, 500, 500, nullptr);
-            //LineTo(hdc, 700, 700);
-            myLine->Render(hdc);
+           
+            program->Render(hdc);
 
             EndPaint(hWnd, &ps);
         }
