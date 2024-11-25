@@ -1,10 +1,14 @@
 #include "framework.h"
 #include "Program.h"
 #include "Scenes/PaintScene.h"
+#include "Scenes/CollisionScene.h"
 Program::Program()
 {
     _sceneTable["PaintScene"] = make_shared<PaintScene>();
-    _curScene = "PaintScene";
+    _sceneTable["CollisionScene"] = make_shared<CollisionScene>();
+
+    _curScene = "CollisionScene";
+
 }
 
 Program::~Program()

@@ -132,6 +132,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Contents\Objects\Collider.h" />
+    <ClInclude Include="Scenes\CollisionScene.h" />
     <ClInclude Include="Contents\Objects\CircleCollider.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Contents\Objects\Liner.h" />
@@ -146,6 +148,8 @@
     <ClInclude Include="WIN_API.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Contents\Objects\Collider.cpp" />
+    <ClCompile Include="Scenes\CollisionScene.cpp" />
     <ClCompile Include="Contents\Objects\CircleCollider.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

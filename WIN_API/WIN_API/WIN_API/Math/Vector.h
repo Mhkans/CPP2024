@@ -92,6 +92,10 @@ public:
 		
 		return Vector(x/ Length() , y/ Length());
 	}
+	void Normalize() {
+		x /= Length();
+		y /= Length();
+	}
 public:
 	float x;
 	float y;

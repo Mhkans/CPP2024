@@ -1,21 +1,28 @@
 #pragma once
-class CircleCollider
+//Collider : 충돌체
+class RectangleCollider;
+
+class CircleCollider :public Collider
 {
-
 public:
-
+	
 	CircleCollider(Vector center, float radius);
 	~CircleCollider();
 
-	Vector& Center() { return _center; }
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
+
 
 	float& Radius() { return _radius; }
 	
-	void Update();
-	void Render(HDC hdc);
+	virtual bool IsCollision(const Vector& pos) const override;
+	virtual bool IsCollision(shared_ptr<CircleCollider> other) const override;
+	virtual bool IsCollision(shared_ptr<RectangleCollider> other) const override;
 
-	Vector _center;
+	
+private:
+
 	float _radius;
 
 };
-//선 사각형 
+

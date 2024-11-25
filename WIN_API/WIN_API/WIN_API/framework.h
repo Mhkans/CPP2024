@@ -29,13 +29,16 @@ using namespace std;
 #include<math/Vector.h>
 
 //contents
+#include "Contents/Objects/Collider.h"
 #include "Contents/Objects/CircleCollider.h"
 #include "Contents/Objects/RectangleCollider.h"
 #include "Contents/Objects/Liner.h"
 
+
 //scene
 #include"Scenes/Scene.h"
 #include"Scenes/PaintScene.h"
+#include"Scenes/CollisionScene.h"
 
 //program
 #include"Program/Program.h"
