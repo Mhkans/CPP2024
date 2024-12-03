@@ -1,104 +1,88 @@
 #pragma once
-#include "framework.h"
+#include <math.h>
+
 struct Vector {
 
 public:
-	Vector() :x(0.0f), y(0.0f) {
+    Vector() :x(0.0f), y(0.0f) {}
+    Vector(float x, float y) : x(x), y(y) {}
+    Vector(const Vector& other) : x(other.x), y(other.y) {}
+    ~Vector() {}
 
+    float Dot(const Vector& other)
+    {
+        float result;
+        result = (this->x * other.x) + (this->y * other.y);
 
-	}
+        return result;
+    }
+    float Cross(const Vector& other) 
+    {
+        float result;
+        result = (this->x * other.y) - (this->y * other.x);
 
-	Vector(float x, float y) : x(x), y(y) {
+        return result;
+    }
+    float Length() const 
+    {
 
+        return sqrtf((x * x) + (y * y));
+    }
 
-	}
+    Vector operator+(const Vector& other) const 
+    {
 
-	Vector(const Vector& other) : x(other.x), y(other.y) {
+        Vector result;
 
+        result.x = this->x + other.x;
+        result.y = this->y + other.y;
 
-	}
+        return result;
+    }
+    Vector operator-(const Vector& other) const
+    {
+        Vector result;
 
-	~Vector() {
+        result.x = this->x - other.x;
+        result.y = this->y - other.y;
 
+        return result;
+    }
+    Vector operator*(const float& value) const
+    {
+        return Vector(x * value, y * value);
+    }
+    Vector NormalVector() const
+    {
+        float length = Length();
 
-	}
+        return Vector(x / length, y / length);
+    }
 
+    Vector& operator=(const Vector& other)
+    {
+        x = other.x;
+        y = other.y;
 
-	float& operator[](int temp) {
+        return *this;
+    }
+    Vector& operator+=(const Vector& other)
+    {
+        x += other.x;
+        y += other.y;
 
-		if (temp == 0) {
+        return *this;
+    }
 
-			return x;
+    void Normalize()
+    {
+        float length = Length();
 
-		}
-		else {
+        x /= length;
+        y /= length;
+    }
 
-			return y;
-		}
-	}
-	
-	Vector operator+(const Vector& other) const { 
-
-		
-
-		Vector result;
-
-		result.x = this->x + other.x;
-		result.y = this->y + other.y;
-
-		return result;
-
-	}
-
-	Vector operator-(const Vector& other) const {
-
-		Vector result;
-
-		result.x = this->x - other.x;
-		result.y = this->y - other.y;
-
-		return result;
-	}
-	Vector operator*(const float& value){
-		Vector result;
-		result.x = x * value;
-		result.y = y * value;
-
-		return result;
-	}
-	float Dot(const Vector& other) {
-
-		float result;
-
-		result = (this->x * other.x) + (this->y * other.y);
-
-		return result;
-	}
-	float Cross(const Vector& other) { 
-
-		float result;
-
-		result = (this->x * other.y) - (this->y * other.x);
-
-		return result;
-
-	}
-	float Length() const {
-
-		return sqrtf((x * x) + (y * y));
-	}
-	Vector NormalVector() const {
-
-		
-		return Vector(x/ Length() , y/ Length());
-	}
-	void Normalize() {
-		x /= Length();
-		y /= Length();
-	}
 public:
-	float x;
-	float y;
-
+    float x;
+    float y;
 };
-// ctrl + m + l

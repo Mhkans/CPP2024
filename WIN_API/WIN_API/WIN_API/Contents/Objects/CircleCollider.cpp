@@ -42,8 +42,7 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other) const
 	return length<_radius;
 }
 bool CircleCollider::IsCollision(shared_ptr<RectangleCollider> other) const
-{
-	//obb aabb 충돌과제
+{	
 	RectangleCollider::OBB_INFO a = other->GetOBB();
 	Vector aTob = _center - a.position;
 	float d = sqrtf(a.length[0] * a.length[0] + a.length[1] * a.length[1]) + _radius;
@@ -56,14 +55,14 @@ bool CircleCollider::IsCollision(shared_ptr<RectangleCollider> other) const
 	Vector ea1 = a.direction[0];
 	Vector normal_ea2 = a.direction[1].NormalVector();
 	Vector ea2 = a.direction[1];
-	// nea1 기준으로 투영
-	float length = abs(normal_ea1.Dot(aTob)); // a To b 길이의 절대값
+	
+	float length = abs(normal_ea1.Dot(aTob)); 
 	float lengthB = _radius;
 	float lengthA = a.length[0];
 	if (length > lengthB + lengthA) {
 		return false;
 	}
-	// nea2 기준으로 투영
+	
 	length = abs(normal_ea2.Dot(aTob));
 	lengthB = _radius;
 	lengthA = a.length[1];

@@ -132,7 +132,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Contents\GameObject\Ball.h" />
+    <ClInclude Include="Contents\GameObject\Barrel.h" />
+    <ClInclude Include="Contents\GameObject\Cannon.h" />
     <ClInclude Include="Contents\Objects\Collider.h" />
+    <ClInclude Include="Scenes\CannonScene.h" />
     <ClInclude Include="Scenes\CollisionScene.h" />
     <ClInclude Include="Contents\Objects\CircleCollider.h" />
     <ClInclude Include="framework.h" />
@@ -148,7 +152,11 @@
     <ClInclude Include="WIN_API.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Contents\GameObject\Ball.cpp" />
+    <ClCompile Include="Contents\GameObject\Barrel.cpp" />
+    <ClCompile Include="Contents\GameObject\Cannon.cpp" />
     <ClCompile Include="Contents\Objects\Collider.cpp" />
+    <ClCompile Include="Scenes\CannonScene.cpp" />
     <ClCompile Include="Scenes\CollisionScene.cpp" />
     <ClCompile Include="Contents\Objects\CircleCollider.cpp" />
     <ClCompile Include="Framework.cpp">

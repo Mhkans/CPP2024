@@ -34,11 +34,15 @@ using namespace std;
 #include "Contents/Objects/RectangleCollider.h"
 #include "Contents/Objects/Liner.h"
 
-
+//GameObject
+#include "Contents/GameObject/Ball.h"
+#include "Contents/GameObject/Barrel.h"
+#include "Contents/GameObject/Cannon.h"
 //scene
 #include"Scenes/Scene.h"
 #include"Scenes/PaintScene.h"
 #include"Scenes/CollisionScene.h"
+#include"Scenes/CannonScene.h"
 
 //program
 #include"Program/Program.h"
