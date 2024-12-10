@@ -5,8 +5,10 @@ public:
 	PaintScene();
 	~PaintScene();
 
-	void Update() override;
-	void Render(HDC hdc)override;
+	virtual void PostInitialize() override {}
+
+	virtual void Update() override;
+	virtual void Render(HDC hdc)override;
 
 private:
 	shared_ptr<CircleCollider> myCircle = make_shared<CircleCollider>(Vector(200, 200), 70);

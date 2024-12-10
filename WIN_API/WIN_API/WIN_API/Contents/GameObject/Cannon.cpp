@@ -8,8 +8,9 @@ Cannon::Cannon()
 	
 	for (int i = 0; i < _ballCount; i++) {
 
-		_balls.push_back(make_shared<Ball>());
+		_ballPool.push_back(make_shared<Ball>());
 	}
+	
 }
 
 Cannon::~Cannon()
@@ -18,52 +19,94 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
-	InputMove(); // 입력해서 움직이게
-	InputBarrelRotation(); // 입력으로 총신 각도 조정
-	Fire();
 	_body->Update();
 	_barrel->Update();
-	for (auto& _ball : _balls) {
-		_ball->Update();
 
+	for (auto ball : _ballPool)
+	{
+		ball->Update();
 	}
-	
+
+	InputMove(); // 입력해서 움직이게
+	InputBarrelRotation(); 
+
+	if (IsFireReady()) {
+		Fire();
+	}
 }
 
 void Cannon::Render(HDC hdc)
 {
 	_barrel->Render(hdc);
 	_body->Render(hdc);
-	for (auto& _ball : _balls) {
+	for (auto& _ball : _ballPool) {
 		_ball->Render(hdc);
 
 	}
 }
 
+//void Cannon::Fire()
+//{
+//	//if (GetAsyncKeyState(VK_SPACE) & 0x8001 && !_spacebarPressed)
+//	//{
+//
+//	//	// 단발식 애쉬평타 만들어오기
+//	//	auto iter = std::find_if(_ballPool.begin(), _ballPool.end(), [](const shared_ptr<Ball>& ball) -> bool
+//	//	{
+//	//		if (ball->IsActive() == false)
+//	//			return true;
+//	//		return false;
+//	//	});
+//
+//	//	if (iter != _ballPool.end()) {
+//
+//	//		(*iter)->Fire(_barrel->GetMuzzle(), _barrel->GetDirection());
+//	//	}
+//
+//
+//	//}
+//	//else if (!(GetAsyncKeyState(VK_SPACE) & 0x8001) && _spacebarPressed)
+//	//{
+//	//	_spacebarPressed = false;
+//	//}
+//	
+//
+//
+//
+//	if (GetAsyncKeyState(VK_SPACE) & 0x8001 && !_spacebarPressed)
+//	{		
+//		_ballPool[_index]->Fire(_barrel->GetMuzzle(), _barrel->GetDirection());
+//     	_index++;
+//		if (_index >= _ballCount) {
+//			_index = 0;
+//		}
+//		_spacebarPressed = true;
+//		//아래로 천천히 떨어지게 하기
+//		//공 여러개 날아가게 하기 메모리 누수 x 
+//	}
+//	else if (!(GetAsyncKeyState(VK_SPACE) & 0x8001) && _spacebarPressed)
+//	{
+//		_spacebarPressed = false;
+//	}
+//}
 void Cannon::Fire()
-{		
-	if (GetAsyncKeyState(VK_SPACE) & 0x8001 && !_spacebarPressed)
+{
+	// 0b 1000 0000 0000 0001
+	// 0b 0111 0000 0000 0001
+	if (GetAsyncKeyState(VK_SPACE) & 0x8001)
 	{
-		
-		Vector dir = mousePos - _body->Center();
-		dir.Normalize();
-		_balls[_index]->SetCenter(_barrel->GetBarrelTip());
-		_balls[_index]->SetDirection(dir);
+		auto iter = std::find_if(_ballPool.begin(), _ballPool.end(), [](const shared_ptr<Ball>& ball) -> bool
+		{
+			if (ball->IsActive() == false)
+				return true;
+			return false;
+		});
 
-  		_index++;
-		if (_index >= _ballCount) {
-			_index = 0;
-		}
-		_spacebarPressed = true;
-		//아래로 천천히 떨어지게 하기
-		//공 여러개 날아가게 하기 메모리 누수 x 
-	}
-	else if (!(GetAsyncKeyState(VK_SPACE) & 0x8001) && _spacebarPressed)
-	{
-		_spacebarPressed = false;
+		if (iter == _ballPool.end()) return;
+
+		(*iter)->Fire(_barrel->GetMuzzle(), _barrel->GetDirection());
 	}
 }
-
 void Cannon::InputMove()
 {
 	if(GetAsyncKeyState(VK_LEFT) & 0x8001)

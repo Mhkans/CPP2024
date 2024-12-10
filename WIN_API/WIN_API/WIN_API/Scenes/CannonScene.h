@@ -4,9 +4,10 @@ class CannonScene : public Scene
 public:
 	CannonScene();
 	~CannonScene();
+	virtual void PostInitialize() override { _cannon->PostInitialize(); }
 
-	void Update() override;
-	void Render(HDC hdc) override;
+	virtual void Update() override;
+	virtual void Render(HDC hdc) override;
 
 private:
 	shared_ptr<class Cannon> _cannon;

@@ -16,20 +16,20 @@ public:
 
         return result;
     }
-    float Cross(const Vector& other) 
+    float Cross(const Vector& other)
     {
         float result;
         result = (this->x * other.y) - (this->y * other.x);
 
         return result;
     }
-    float Length() const 
+    float Length() const
     {
 
         return sqrtf((x * x) + (y * y));
     }
 
-    Vector operator+(const Vector& other) const 
+    Vector operator+(const Vector& other) const
     {
 
         Vector result;
@@ -73,13 +73,29 @@ public:
 
         return *this;
     }
+    Vector& operator-=(const Vector& other)
+    {
+        x -= other.x;
+        y -= other.y;
 
+        return *this;
+    }
     void Normalize()
     {
         float length = Length();
 
         x /= length;
         y /= length;
+    }
+
+    float Angle() const
+    {
+        return atan2(y, x);
+    }
+
+    float Angle(const Vector& other)
+    {
+        return Angle() - other.Angle();
     }
 
 public:

@@ -11,7 +11,7 @@ public:
 	void SetCannon(shared_ptr<class Cannon> cannon) { _cannon = cannon; }
 	void SetDirection(Vector dir) { _direction = dir; }
 	Vector GetDirection() { return _direction; }
-	Vector GetBarrelTip() { return _line->_end; }
+	Vector GetMuzzle() { return _line->_end; }
 
 private:
 	shared_ptr<Liner> _line;

@@ -110,8 +110,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
+   Vector offSet = Vector(300, 300);
+
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+       offSet.x, offSet.y, WIN_WIDTH, WIN_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -157,7 +159,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE: {
-        SetTimer(hWnd, 1, 1, nullptr); // 1ms마다 WM_TIMER 메세지 처리하도록 명령
+        SetTimer(hWnd, 1, 10, nullptr); // 10ms마다 WM_TIMER 메세지 처리하도록 명령
         break;
     }
     case WM_TIMER:

@@ -69,6 +69,12 @@
     <ClInclude Include="Contents\GameObject\Cannon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\LineScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\FortressScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WIN_API.cpp">
@@ -111,6 +117,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Contents\GameObject\Cannon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\LineScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\FortressScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

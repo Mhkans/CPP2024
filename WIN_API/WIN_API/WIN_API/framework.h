@@ -43,6 +43,8 @@ using namespace std;
 #include"Scenes/PaintScene.h"
 #include"Scenes/CollisionScene.h"
 #include"Scenes/CannonScene.h"
+#include"Scenes/LineScene.h"
+#include"Scenes/FortressScene.h"
 
 //program
 #include"Program/Program.h"
