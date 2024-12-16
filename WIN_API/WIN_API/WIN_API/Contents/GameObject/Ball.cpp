@@ -3,7 +3,7 @@
 
 Ball::Ball()
 {
-	_ball = make_shared<CircleCollider>(Vector(-1000,0), 15);
+	_ball = make_shared<CircleCollider>(Vector(0,0), 10);
 }
 
 Ball::~Ball()
@@ -32,7 +32,6 @@ void Ball::Render(HDC hdc)
 	if (_isActive == false) return;
 	_ball->Render(hdc);
 }
-
 void Ball::Fire(Vector pos, Vector dir)
 {
 	_isActive = true;
@@ -51,3 +50,5 @@ bool Ball::IsOut()
 
 	return false;
 }
+
+

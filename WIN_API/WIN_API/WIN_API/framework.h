@@ -19,7 +19,7 @@
 #include<unordered_map>
 #include<algorithm>
 #include<string>
-
+#include<functional>
 
 
 using namespace std;
@@ -38,6 +38,7 @@ using namespace std;
 #include "Contents/GameObject/Ball.h"
 #include "Contents/GameObject/Barrel.h"
 #include "Contents/GameObject/Cannon.h"
+#include "Contents/GameObject/Maze/Block.h"
 //scene
 #include"Scenes/Scene.h"
 #include"Scenes/PaintScene.h"
@@ -45,9 +46,11 @@ using namespace std;
 #include"Scenes/CannonScene.h"
 #include"Scenes/LineScene.h"
 #include"Scenes/FortressScene.h"
+#include"Scenes/MazeScene.h"
 
 //program
 #include"Program/Program.h"
 
 
 extern Vector mousePos;
+extern HWND hWnd;

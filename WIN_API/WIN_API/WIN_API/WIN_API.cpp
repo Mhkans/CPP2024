@@ -21,7 +21,7 @@ API : Application Programming Interface
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
-
+HWND hWnd;
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -88,7 +88,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hInstance      = hInstance;
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINAPI));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+    wcex.hbrBackground  = (HBRUSH)(CreateSolidBrush(RGB(50,50,50)));
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_WINAPI);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
@@ -112,7 +112,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    Vector offSet = Vector(300, 300);
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
        offSet.x, offSet.y, WIN_WIDTH, WIN_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
@@ -122,7 +122,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
+   
    return TRUE;
 }
 
@@ -165,7 +165,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_TIMER:
     {
         program->Update();
-        InvalidateRect(hWnd, nullptr, true); 
+        InvalidateRect(hWnd, nullptr, false); 
         break;
     }
     case WM_MOUSEMOVE: { //마우스가 움직일때마다 처리되는 메세지

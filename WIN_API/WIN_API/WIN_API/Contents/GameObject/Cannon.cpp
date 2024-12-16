@@ -19,30 +19,34 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
-	_body->Update();
-	_barrel->Update();
-
-	for (auto ball : _ballPool)
-	{
-		ball->Update();
+	if (_hp == 0) {
+		_isAtctive = false;
 	}
-
-	InputMove(); // 입력해서 움직이게
-	InputBarrelRotation(); 
-
-	if (IsFireReady()) {
-		Fire();
+	if (_isAtctive) {
+		_body->Update();
+		_barrel->Update();
+		for (auto ball : _ballPool)
+		{
+			ball->Update();
+		}
 	}
+	
+	
+
+
 }
 
 void Cannon::Render(HDC hdc)
 {
-	_barrel->Render(hdc);
-	_body->Render(hdc);
-	for (auto& _ball : _ballPool) {
-		_ball->Render(hdc);
+	if (_isAtctive) {
+		_barrel->Render(hdc);
+		_body->Render(hdc);
+		for (auto& _ball : _ballPool) {
+			_ball->Render(hdc);
 
+		}
 	}
+	
 }
 
 //void Cannon::Fire()
@@ -89,7 +93,7 @@ void Cannon::Render(HDC hdc)
 //		_spacebarPressed = false;
 //	}
 //}
-void Cannon::Fire()
+void Cannon::Fire(bool& turn)
 {
 	// 0b 1000 0000 0000 0001
 	// 0b 0111 0000 0000 0001
@@ -105,8 +109,15 @@ void Cannon::Fire()
 		if (iter == _ballPool.end()) return;
 
 		(*iter)->Fire(_barrel->GetMuzzle(), _barrel->GetDirection());
+
+		turn = !turn;
+		
+	
+		
 	}
 }
+
+
 void Cannon::InputMove()
 {
 	if(GetAsyncKeyState(VK_LEFT) & 0x8001)
@@ -122,4 +133,17 @@ void Cannon::InputBarrelRotation()
 	dir.Normalize();
 
 	_barrel->SetDirection(dir);
+}
+
+void Cannon::IsDamaged(shared_ptr<class Ball> ball)
+{	
+	if (ball->GetCollider()->IsCollision(_body) && !_isDamaged)
+	{
+		_hp -= 15;
+		_body->SetRed();
+		_isDamaged = true;
+	}
+	if (_hp <= 0) {
+		_hp = 0;
+	}
 }

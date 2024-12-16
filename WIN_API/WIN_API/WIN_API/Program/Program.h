@@ -11,11 +11,12 @@ public:
 	void SetScene(string scene) { _curScene = scene; }
 	string CurScene() { return _curScene; }
 
+	static HDC backBuffer;
 private:
 
 	unordered_map<string, shared_ptr<Scene>> _sceneTable;
 	string _curScene;
-	
+	HBITMAP _hBitMap;
 
 };
 
