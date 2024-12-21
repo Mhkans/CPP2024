@@ -79,7 +79,6 @@ void MazePlayer::RightHand()
         }
 
         // 이동
-        //            LEFT(1)         4
         int newDir = (_dir - 1 + DIR_COUNT) % DIR_COUNT; // 오른쪽 회전 => % 순환 구조를 이용한 설계
         Vector oldDirVector = frontPos[_dir]; // 지금 내 앞방향
         Vector newDirVector = frontPos[newDir]; // 지금 내 오른쪽
@@ -109,7 +108,84 @@ void MazePlayer::RightHand()
 
     _pos = _startPos;
 }
+void MazePlayer::RightHand_stack()
+{
+    // 우수법으로 갈 수 있는 경로(pos)들을 _path에다가 담아놓을 예정
+    _pos = _startPos;
+    _path.push_back(_pos);
 
+    Vector frontPos[4] =
+    {
+        Vector{0, -1}, // UP
+        Vector{-1, 0}, // LEFT
+        Vector{0,1}, // DOWN
+        Vector{1,0} // RIGHT
+    };
+
+    while (true)
+    {
+        // 끝점에 도달했다.
+        if (_pos == _endPos)
+        {
+            _path.push_back(_pos);
+            break;
+        }
+
+        // 이동
+        //            LEFT(1)         4
+        int newDir = (_dir - 1 + DIR_COUNT) % DIR_COUNT; // 오른쪽 회전 => % 순환 구조를 이용한 설계
+        Vector oldDirVector = frontPos[_dir]; // 지금 내 앞방향
+        Vector newDirVector = frontPos[newDir]; // 지금 내 오른쪽
+
+        Vector rightPos = _pos + newDirVector;
+        Vector forwardPos = _pos + oldDirVector;
+        if (CanGo(rightPos.y, rightPos.x)) // 내 오른쪽이 뚫려있냐
+        {
+            // 오른쪽으로 회전하고 1칸 움직임
+            _dir = static_cast<Dir>(newDir);
+            _pos = rightPos;
+            _path.push_back(_pos);
+        }
+        else if (CanGo(forwardPos.y, forwardPos.x)) // 오른쪽이 막혀있으면 가던 방향 그대로 간다.
+        {
+            // 가던 방향으로 1칸 움직임
+            _pos = forwardPos;
+            _path.push_back(_pos);
+        }
+        else // 오른쪽도 막혀있고, 앞도 막혀있다.
+        {
+            // 왼쪽으로 회전
+            int leftDir = (_dir + 1) % DIR_COUNT;
+            _dir = static_cast<Dir>(leftDir);
+        }
+    }
+
+    stack<Vector> s;
+
+    for (int i = 0; i < _path.size() - 1; i++)
+    {
+        if (s.empty() == false && s.top() == _path[i + 1])
+            s.pop();
+        else
+            s.push(_path[i]);
+    }
+
+
+    // s ... 사이클(갔다가 돌아오는 길)이였으면 Pop
+
+    _path.clear();
+    while (true)
+    {
+        _path.push_back(s.top());
+        s.pop();
+
+        if (s.empty())
+            break;
+    }
+    std::reverse(_path.begin(), _path.end());
+
+    _pos = _startPos;
+}
 bool MazePlayer::CanGo(int y, int x)
 {
 

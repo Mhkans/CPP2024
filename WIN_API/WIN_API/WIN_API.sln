@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WIN_API", "WIN_API\WIN_API.vcxproj", "{4E5EC994-C8B6-4C2D-AAF6-2B7FDFAE8BB4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Algorithm", "Algorithm\Algorithm.vcxproj", "{760C0BF1-5BE6-4430-8799-1C8B928ED35E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{4E5EC994-C8B6-4C2D-AAF6-2B7FDFAE8BB4}.Release|x64.Build.0 = Release|x64
 		{4E5EC994-C8B6-4C2D-AAF6-2B7FDFAE8BB4}.Release|x86.ActiveCfg = Release|Win32
 		{4E5EC994-C8B6-4C2D-AAF6-2B7FDFAE8BB4}.Release|x86.Build.0 = Release|Win32
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Debug|x64.ActiveCfg = Debug|x64
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Debug|x64.Build.0 = Debug|x64
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Debug|x86.ActiveCfg = Debug|Win32
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Debug|x86.Build.0 = Debug|Win32
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Release|x64.ActiveCfg = Release|x64
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Release|x64.Build.0 = Release|x64
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Release|x86.ActiveCfg = Release|Win32
+		{760C0BF1-5BE6-4430-8799-1C8B928ED35E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

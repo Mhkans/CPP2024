@@ -24,6 +24,7 @@ public:
 	Vector& GetStartPos() { return _startPos; }
 	Vector& GetEndPos() { return _endPos; }
 	void RightHand();
+	void RightHand_stack();
 
 	bool CanGo(int y, int x);
 

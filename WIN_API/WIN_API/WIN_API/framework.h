@@ -20,7 +20,7 @@
 #include<algorithm>
 #include<string>
 #include<functional>
-
+#include<stack>
 
 using namespace std;
 
