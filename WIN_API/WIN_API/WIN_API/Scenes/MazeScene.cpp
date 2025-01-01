@@ -18,7 +18,13 @@ void MazeScene::PostInitialize()
 	_player->SetMaze(_maze);
 	_player->Init();
 	//_player->RightHand();
-	_player->RightHand_stack();
+	//_player->RightHand_stack();
+	//_player->FindPath_DFS();
+	//_player->FindPath_BFS();
+	//_player->Shortest_FindPath_BFS();
+	//_player->FindPath_Djikstra(_player->GetStartPos());
+	_player->FindPath_Astar(_player->GetStartPos(),_player->GetEndPos());
+	
 }
 
 void MazeScene::Update()

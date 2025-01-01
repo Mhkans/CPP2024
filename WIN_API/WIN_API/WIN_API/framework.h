@@ -21,6 +21,7 @@
 #include<string>
 #include<functional>
 #include<stack>
+#include<queue>
 
 using namespace std;
 

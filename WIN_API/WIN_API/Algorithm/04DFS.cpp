@@ -91,7 +91,7 @@ void DFS_ALL() { //DFS를 이용해서 인접한 집단의 수를 아는방법
 int main()
 {
 	CreateGraph_Matrix();
-	DFS(0);
-
+	//DFS(0);
+	DFS_ALL();
 	return 0;
 }
