@@ -6,9 +6,9 @@ using namespace std;
 생성자 : 멤버변수를 초기화 하는 역할
 객체가 생성되려면 이 생성자를 통해 생성되어야한다.
 
-객체 : 메모리에 클래스로 기능과 속성을 가진 변수를 만들어서 할당하는것
+객체 : 속성과 기능을 갖고 메모리에 할당되어 있는 데이터
 
-객체화,인스턴스화 : 클래스로 변수를 만들어서 할당(생성자를 통해서) 하는 작업
+객체화,인스턴스화 : 클래스로 변수를 만들어서 메모리에 할당(생성자를 통해서) 하는 작업
 */
 
 class Player {
@@ -16,23 +16,28 @@ class Player {
 public:
 	//기본생성자 : 암묵적으로 정의하지 않아도 컴파일러가 자동으로 만들어준다.
 	//만약 다른 생성자가 정의되어있을 시 자동으로 만들어지지 않는다
-	Player():_name("") , _hp(0) , _atk(0) , _maxHp(100)//빠른초기화영역 , 상수(const)는 여기서 초기화해야한다
+	Player():_name("") , _hp(0) , _atk(0) , _maxHp(100)//빠른초기화영역 Initialize List , 상수(const)는 여기서 초기화해야한다
 	{
 
 		cout << "기본생성자 호출" << endl;
-		//늦은 초기화 영역
+		//늦은 초기화 영역 , 대입연산자 사용
 		this->_name = " ";
 		this->_hp = 0;
 		this->_atk = 0;
 	}
 
-	//타입변환 생성자 , 매개변수가 있는 생성자
-	Player(string name, int hp, int atk) :_name(name),_hp(hp),_atk(atk) , _maxHp(hp){
+	//타입변환 생성자 , 매개변수가 있는 생성자 
+	Player(string name, int hp, int atk) :_name(name),_hp(hp),_atk(atk) , _maxHp(hp){ 
 
 		cout << "타입변환 생성자 호출" << endl;
 	}
-
-	//소멸자
+	//복사생성자 -  Player p2 = p; ,player p2(p); ,정의하지 않아도 만들어준다
+	Player(const Player& other) :_name(other._name), _hp(other._hp), _atk(other._atk), _maxHp(other._maxHp) {
+		_hp = other._hp;
+		_atk = other._atk; 
+		//얕은복사
+	}
+	//소멸자 - 동적할당 해제 , 소멸 처리
 	~Player() {
 
 		cout << "소멸자 호출" << endl;

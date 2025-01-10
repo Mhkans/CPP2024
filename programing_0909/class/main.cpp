@@ -133,8 +133,12 @@ public:
 	int _hp; 
 
 };
-
-
+int Plus(int a, int b)  {
+	return a + b;
+}
+float Plus(float a, float b) {
+	return a + b;
+}
 int main() {
 	/* 
 	//은닉성
@@ -167,7 +171,36 @@ int main() {
 	p3.Attack(); // 플레이어의 어택함수
 	*/
 
-
+	cout << Plus(1, 2);
+	cout << Plus(1.0f, 3.0f);
 	return 0;
 }
 //ctr + r+ r 일괄바꾸기
+
+/*
+함수 오버로딩 
+-매개변수의 개수나 매개변수의 자료형이 달라도 같은 이름으로 함수를 여러개 정의 할 수 있는 기능
+반환형은 달라져도 매개변수의 개수나 자료형이 같다면 같은함수로 인식하므로 오버로딩 불가능
+컴파일타임에 함수가 결정되고 이것을 정적 바인딩 이라고 한다
+예시) 
+int Plus(int a, int b)  {
+	return a + b;
+}
+float Plus(float a, float b) {
+	return a + b;
+}
+
+함수 오버라이딩
+-부모 클래스에서 정의한 함수를 자식클래스에서 재정의 하는 방법
+
+조건: 함수의 이름이 같아야하고 매개변수의 개수나 자료형이 같아야한다
+예시) 부모클래스에서 Attack이라는 함수를 정의할때 자식클래스에서 2회 공격하고싶다면 
+함수 오버라이딩을 사용하여 Attack함수를 재정의 하여 2회공격 가능
+
+사용방법은 부모클래스의 Attack함수에 virtual키워드를 붙여서 virtual void Attack(Creature* other) 로 변경
+
+이때 메모리4영역중에 data영역에 virual fuction table이 생성되고 여기서 virtual키워드가 붙은 함수의 포인터를 관리하여
+자식클래스의 Attack함수가 호출되면 가상함수테이블에서 여러 Attack중에 자식의 Attack이 호출된다
+
+이렇게 함수를 호출하는 객체를 확인하고 해당 객체의 함수를 런타임에 불러와서 이것을 동적바인딩 이라고 한다
+*/

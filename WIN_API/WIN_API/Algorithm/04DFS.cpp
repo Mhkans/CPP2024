@@ -29,25 +29,25 @@ void CreateGraph_Matrix() {
 
 	adjacent[0][0] = true;
 	adjacent[0][1] = true;
-	adjacent[0][2] = true;
+	//adjacent[0][2] = true;
 
 	adjacent[1][0] = true;
 	adjacent[1][1] = true;
-	adjacent[1][4] = true;
-	adjacent[1][5] = true;
+	//adjacent[1][4] = true;
+	//adjacent[1][5] = true;
 
-	adjacent[2][0] = true;
+	//adjacent[2][0] = true;
 	adjacent[2][2] = true;
 	adjacent[2][3] = true;
 
 	adjacent[3][2] = true;
 	adjacent[3][3] = true;
 
-	adjacent[4][1] = true;
+	//adjacent[4][1] = true;
 	adjacent[4][4] = true;
 	adjacent[4][6] = true;
 
-	adjacent[5][1] = true;
+	//adjacent[5][1] = true;
 	adjacent[5][5] = true;
 
 	adjacent[6][4] = true;

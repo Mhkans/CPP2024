@@ -2,6 +2,11 @@
 
 using namespace std;
 
+// DATA
+// - bss영역 : 초기화되지않은 전역변수
+// - data영역 : 초기화된 전역변수
+// - rodata영역 : 상수(리터럴 상수... 등등)
+
 int aInt = 1;
 
 float aFloat = 1.5f;
@@ -9,139 +14,132 @@ float aFloat = 1.5f;
 short aShort = 123;
 //형변환
 
-//안전한 형변환
+//안전한 형변환 : int형을 float으로
 
-//불안전한 형변환
+//불안전한 형변환 : float형을 int로 , 데이터가 큰 -> 데이터가 작은(기본자료형에 한해서)
+
+//업캐스팅 : 자식 클래스로 생성된 객체를 부모 클래스 포인터로 가리키는 것
+// -> 안전한 캐스팅
+//다운캐스팅 : 부모 클래스로 생성된 객체를 자식 클래스 포인터로 가리키는 것
+// -> 불안전한 캐스팅
+
 /*
-실수 -> 정수
-데이터가 큰 -> 데이터가 작은(기본자료형에 한해서)
+1. static_cast : 정적바인딩 컴파일타임에 정해진다 , 논리적으로 가능하면 컴파일 통과
+2. dynamic_cast : 상속 구조에서만 (가상함수 테이블이 존재하는 경우) 사용가능 ,성공하면 캐스팅 성공 실패하면 nullptr반환
+런타임에 성공여부반환
+3. const_cast
+4. reinterpret_cast : 강제적 형변환 , 패킷 데이터를 보냈을때 (비트 그대로 ex 0000 0100) 패킷아이디를 확인하고 자료형을 정함
 */
+struct Packet
+{
+	int packetId; // 사용자끼리 정하는거
+	int aInt; // 32비트 (0100)
+};
 
-/*
-static_cast
-dynamic_cast
-const_cast
-reinterpret_cast
-*/
-class Player {
-
+class Player
+{
 public:
+	virtual void Attack() { cout << "Player Attack!" << endl; }
 
-	Player():_type(0){}
-	virtual ~Player() {}
-	virtual void VirtualF(){}
-	int _hp;
-	int _type;
+	int type = 0;
 };
 
-class Knight : public Player {
-
+class Knight : public Player
+{
 public:
-	Knight(){_type = 1; }
-	virtual void VirtualF() override {}
-	int _stamina;
-};
-class Archer : public Player {
+	Knight() { type = 1; }
 
+	virtual void Attack() override { cout << "Knight Attack!" << endl; }
+};
+
+class Archer : public Player
+{
 public:
-	Archer() { _type = 1; }
-	virtual void VirtualF() override {}
-	
-};
-class Pet {
+	Archer() { type = 2; }
 
-
+	virtual void Attack() override { cout << "Archer Attack!" << endl; }
 };
 
-void PrintType(Player* p) {
 
-	int type = p->_type;
+template<typename T>
 
-	switch (type) {
+T MyDynamic(T player) { //직접구현하면 가상함수테이블 없이 가능하긴하다
+	if (player->type == 1) {
 
-	case 1:{
-		Knight* k = dynamic_cast<Knight*>(p);
-		if (k != nullptr) {
-
-			cout << "Knight" << endl;
-		}
+		return reinterpret_cast<T>(player)l
+			
 	}
-	case 2:{
-		Archer* a = dynamic_cast<Archer*>(p);
-		if (a != nullptr) {
-
-			cout << "Archer" << endl;
-		}
+	else {
+		return nullptr;
 	}
-	default: {
+
+}
+
+int main()
+{
+	int aInt = 1;
+	float aFloat = aInt;
+	aFloat = 1.523f;
+	aInt = aFloat;
+
+	Knight* k = new Knight();
+	Player* p = k; // 업캐스팅
+
+	Player* temp = new Player();
+	Knight* temp2 = (Knight*)temp; // 다운캐스팅
+
+	// 캐스팅 4총사
+	// static_cast
+	aFloat = static_cast<float>(aInt);
+	Player* p1 = static_cast<Player*>(new Knight()); // 업캐스팅
+
+	// dynamic_cast
+	Player* p2 = new Knight();
+
+	// ... 많은 일들이 있었음.
+
+	Knight* p3 = dynamic_cast<Knight*>(p2); // RTTI 정보를 줘야한다.
+	if (p3 == nullptr)
+	{
+		cout << "p2는 Knight가 아니였습니다." << endl;
+	}
+	else
+	{
+		cout << "p2는 Knight였습니다." << endl;
+	}
+
+	// const_cast
+	const char* str1 = "hello world!";
+	char str2[13] = "hello world!";
+
+	char* str3 = const_cast<char*>(str1);
+	//str3[0] = 't';
+
+	// reinterpret_cast
+	// 서버에서 주로 쓰인다.
+	aFloat = 1.234f;
+	int* aPtr = reinterpret_cast<int*>(&aFloat);
+
+	switch (p2->type)
+	{
+	case 1:
+	{
+		p3 = reinterpret_cast<Knight*>(p2);
+		break;
+	}
+	case 2:
+	{
+		p3 = nullptr;
+	}
+
+	default:
 		break;
 	}
 
-	}
-}
 
-
-
-int main() {
-
-	int aInt = 1;
-	float aFloat = static_cast<int>(aInt); 
-	// static - 논리적으로 수행가능한 형변환이면 ok
-
-	Player* p = static_cast<Player*>(new Knight());
-
-	//p = static_cast<Player*>(new Pet()); //안됨
-
-	// dynamic - 상속구조 , vft able을 갖고있어야 사용 가능하다. 
-	// 런타임에 검사(타입추론 vftable -> runtime type information rtti)하므로 컴파일러오류가 안난다 실패하면 nullptr 반환
-
-	PrintType(p);
-
-	/*
-	data 영역
-	- data : 초기화된 전역변수
-	- bss : 초기화되지않은 전역변수
-	- rodata : 상수
-	*/
-
-	const char* str = "hanil"; //rvalue 리터럴상수 -> rodata 포인터임 32비트환경에서 rodata에 4바이트
-	char str2[7] = "hanil2"; // L : 스택에 7바이트 
-	
-	char* temp = const_cast<char*>(str);
-
-	//*temp = 't'; 엑세스 위반 
-
-	
-
-
-
+	delete p2;
+	delete temp;
+	delete k;
 
 	return 0;
 }
-/*
-
-
-	aFloat = aInt; //안전
-	aInt = aFloat; //불안전 aInt 1 이 되어서 뒤에 0.5f가 날아가게된다 
-
-	aInt = 32768;
-	aShort = aInt;
-
-	Player p{ 1 };
-	Knight k;
-	k._hp = 2;
-	k._stamina = 3;
-
-	p = k;
-
-	Player* p2 = new Knight();
-	Knight* k2 = (Knight*)(new Player());//다운캐스팅
-
-	k2->_hp = 123;
-	k2->_stamina = 12;//메모리 오염 위험
-
-
-	cout << k2->_hp << endl;
-	cout << k2->_stamina << endl;
-
-	*/

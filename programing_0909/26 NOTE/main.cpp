@@ -1,10 +1,13 @@
 #include<iostream>
 #include<vector>
 #include<list>
+#include<queue>
+#include<stack>
 #include<map>
 #include<unordered_map>
 #include <algorithm> 
 #include<string>
+
 
 
 using namespace std;
@@ -105,4 +108,17 @@ int main() {
 	
 
 	return 0;
+}
+int solution(vector<int> array, int n) {
+    int answer = 0;
+    map<int, vector<int>> m; 
+
+    for (int i = 0; i < array.size();i++) {
+
+        m[std::abs(array[i] - n)].push_back(array[i]);
+        
+    }
+    
+    
+    return answer;
 }

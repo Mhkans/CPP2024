@@ -66,8 +66,6 @@ public:
 	*/
 	Vector operator+(const Vector& other) const { //뒤에붙은 const 는 자기자신을 바꾸지말라는 뜻
 
-		//this -> 5; //오류
-
 		Vector result;
 
 		result._x = this->_x + other._x;

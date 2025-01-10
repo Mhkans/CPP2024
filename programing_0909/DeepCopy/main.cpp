@@ -1,82 +1,63 @@
-#include<iostream>
+#include <iostream>
+
 using namespace std;
 
-class Pet {
-
+class Pet
+{
 public:
-	void Attack() {
 
-		cout << "Pet attack" << endl;
-	}
 private:
 	int _hp;
-	int _atk;
+	//
 };
 
-
-class Player {
-
+class Player
+{
 public:
-	Player() :_hp(0),_pet(new Pet()) {}
-	Player(const Player& other):_hp(other._hp) { //복사생성자
-
-		if (_pet != nullptr) {
-
-			*_pet = *other._pet;
-		}
-		else {
-
-			_pet = new Pet(*other._pet);
-		}
-
+	Player()
+		: _pet(new Pet())
+	{
+		cout << "Player 생성자" << endl;
 	}
 
-	~Player() { delete _pet; }
+	~Player()
+	{
+		cout << "Player의 소멸자" << endl;
 
-	Player& operator=(const Player& other) {
+		if (_pet == nullptr) return;
 
-		_hp = other._hp;
-		if (_pet != nullptr) {
-
-			*_pet = *other._pet;
-		}
-		else {
-
-			_pet = new Pet(*other._pet);
-			
-		}
-
-		return(*this);
+		delete _pet;
 	}
 
-	void Attack() {
-
-		cout << "player attack" << endl;
-		if (_pet != nullptr) {
-			_pet->Attack();
-		}
+	// 얕은 복사 => 깊은 복사
+	// 깊은 복사 : 동적할당되어있는 멤버변수를 복사해서 새로운 객체를 만드는 작업
+	Player(const Player& p)
+		: _pet(new Pet(*p._pet))
+	{
+		cout << "복사 대입 생성자 호출" << endl;
 	}
+
+	Player& operator=(const Player& other)
+	{
+		cout << "대입 연산자 호출" << endl;
+		_pet = new Pet(*other._pet);
+
+		return *this;
+	}
+
 private:
-	int _hp;
+	// 내부에서 동적할당
 	Pet* _pet;
 };
 
-
-int main() {
-
-	Player* p1 = new Player();
-	Player* p2 = new Player(*p1);
-	//(*p2) = (*p1);
-
-	p1->Attack();
-
-
-
-
-	delete p2;
-	delete p1;
-	
-
+int main()
+{
+	Player p;
+	Player p2 = p;
+	Player p3;
+	p3 = p2;
+	// 허상포인터
+	// 지워진 곳(허상포인터)을 한번 더 지울려고한다.
 
 
 	return 0;

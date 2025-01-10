@@ -8,6 +8,13 @@
 class Maze
 {
 public:
+	struct Edge {
+		Vector u;//시작점
+		Vector v;//끝점
+		int cost;//가중치
+	};
+	
+
 	Maze();
 	~Maze();
 
@@ -15,6 +22,7 @@ public:
 	void Render(HDC hdc);
 
 	void CreateMaze();
+	void CreateMaze_Kruskal();
 
 	Vector GetStartPos() { return { 1,1 }; }
 	Vector GetEndPos() { return { MAX_X - 2, MAX_Y - 2 }; }
@@ -23,7 +31,7 @@ public:
 	void SetBlockType(int y, int x, Block::BlockType type) { _blocks[y][x]->SetType(type); }
 
 private:
-	vector<vector<shared_ptr<Block>>> _blocks; // 25 x 25
+	vector<vector<shared_ptr<Block>>> _blocks; 
 };
 
 

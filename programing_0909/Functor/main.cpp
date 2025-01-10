@@ -3,8 +3,10 @@
 using namespace std;
 /*
 functor : 함수객체 
+functional -> callable 객체를 넣을수있음 functor도 가능
+함수포인터와 다르게 객체라서 속성을 가질수있다
 
-
+함수포인터와 함수객체를 같이 사용
 */
 
 struct Functor {

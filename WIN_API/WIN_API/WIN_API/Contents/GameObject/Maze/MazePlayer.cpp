@@ -15,7 +15,7 @@ void MazePlayer::Update() //플레이어 위치표시
 {
     if (_pathIndex >= _path.size() - 1) {
                
-        _maze->CreateMaze();
+        _maze->CreateMaze_Kruskal();
         Init();
         FindPath_Astar(_startPos,_endPos);
         _maze->SetBlockType(_maze->GetEndPos().y, _maze->GetEndPos().x, Block::BlockType::NONE);

@@ -1,12 +1,13 @@
 #include "framework.h"
+#include"Math/DisjointSet.h"
 #include "Maze.h"
 #include "Block.h"
 Maze::Maze()
 {
 	Vector offset = Vector(400, 100);
-	_blocks.resize(MAX_X);
+	_blocks.resize(MAX_Y);
 	for (int y = 0; y < MAX_Y; y++) {
-		_blocks[y].reserve(MAX_Y);
+		_blocks[y].reserve(MAX_X);
 		for (int x = 0; x < MAX_X; x++) {
 
 			shared_ptr<Block> block = make_shared<Block>();
@@ -18,7 +19,7 @@ Maze::Maze()
 			_blocks[y].push_back(block);
 		}
 	}
-	CreateMaze();
+	CreateMaze_Kruskal();
 }
 
 Maze::~Maze()
@@ -107,5 +108,82 @@ void Maze::CreateMaze()
 			else
 				_blocks[y + 1][x]->SetType(Block::BlockType::ABLE); // 아래쪽 뚫기
 		}
+	}
+}
+
+void Maze::CreateMaze_Kruskal()
+{
+	for (int y = 0; y < MAX_Y; y++)
+	{
+		for (int x = 0; x < MAX_X; x++)
+		{
+			if (x % 2 == 0 || y % 2 == 0)
+			{
+				_blocks[y][x]->SetType(Block::BlockType::DISABLE);
+			}
+			else
+			{
+				_blocks[y][x]->SetType(Block::BlockType::ABLE);
+			}
+		}
+	}
+	//Edge만들기
+
+	vector<Edge> edges;
+	for (int y = 0; y < MAX_Y; y++) {
+
+		for (int x = 0; x < MAX_X; x++) {
+
+			if (x % 2 == 0 ||y%2 ==0) { //노드가 아니면 패스
+				continue;
+			}
+			if (x < MAX_X - 2) {
+				int randCost = rand() % 100;
+
+				Edge edge;
+				edge.cost = randCost;
+				edge.u = Vector(x, y);
+				edge.v = Vector(x + 2, y);
+
+				edges.push_back(edge);
+
+			}
+			if (y < MAX_Y - 2) {
+				int randCost = rand() % 100;
+
+				Edge edge;
+				edge.cost = randCost;
+				edge.u = Vector(x, y);
+				edge.v = Vector(x, y+2);
+
+				edges.push_back(edge);
+
+			}
+			
+		}
+	}
+
+	std::sort(edges.begin(), edges.end(), [](const Edge& a , const Edge& b) {
+
+		if (a.cost < b.cost) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	});
+	DisJointSet set(MAX_Y * MAX_X);
+	for (auto& edge : edges) {
+		int u = edge.u.y * MAX_Y + edge.u.x;
+		int v = edge.v.y * MAX_Y + edge.v.x;
+
+		if (set.FindLeader(u) == set.FindLeader(v)) {
+			continue;
+		}
+		set.Merge(u, v);
+		int x = ((int)edge.u.x + (int)edge.v.x) / 2;
+		int y = ((int)edge.u.y + (int)edge.v.y) / 2;
+		_blocks[y][x]->SetType(Block::BlockType::ABLE);
 	}
 }

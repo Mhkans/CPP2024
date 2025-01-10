@@ -4,17 +4,24 @@ using namespace std;
 
 /*
 code
+
 data - 전역변수 정적변수
+
 생성주기 : 프로그램 실행될때 할당 -> 프로그램 종료시 삭제
 장점 : 모든 곳에서 접근이 가능하다.
 단점 : 프로그램 종료되기 전까지 해제가 불가능, 데이터영역의 크기가 작다
 
 stack - 지역변수 , 반환주소값 , 매개변수 -> 스택프레임
+
 생성주기 : 함수 호출 시 생성 -> 함수 종료시 소멸
 장점 , 단점 : 함수 밖으로 꺼낼 수 없다 , 메모리오염 
 
-heap - 프로그래머의 영역
+heap - 프로그래머의 영역 사용자가 직접 제어하는 메모리
+
 생성주기 : 프로그래머가 직접 생성 ,소멸을 만들어줌
+
+동적할당 -> heap영역에 메모리를 할당하는 작업 , 운영체제가 도와주는 작업(커널영역)
+생성 소멸 시점은 정할수있으나 할당은 운영체제가
 
 
 
@@ -54,6 +61,7 @@ int main() {
 	//c++ 스타일 동적할당 : new delete , new[] delete[]
 
 	int* intPtr = new int(); //4바이트 할당
+	int* intPtr2 = new int[25]; // 100바이트 할당
 	Player* pPtr = new Player(10, 2);
 	char* charPtr = new char[100]; //100바이트 할당
 	Player* pArr = new Player[100]; // 기본생성자 정의를 해야함
@@ -68,9 +76,13 @@ int main() {
 
 
 	delete[] pArr;
-	delete intPtr;
 	delete pPtr;
 	delete[] charPtr;
+	delete[] intPtr2;
+	delete intPtr;
+	
+	
+	
 
 
 	return 0;

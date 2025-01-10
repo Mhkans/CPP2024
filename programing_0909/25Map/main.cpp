@@ -70,10 +70,10 @@ int main() {
 	//탐색
 
 	myUm[555];
-
+	
 	//트리 맵 - 쓰는방법은 같은데 내부구조는 다름 
 	map<int, User*> myM;
-
+	
 	for (int i = 0; i < users.size(); i++) {
 
 		myM[i] = &users[i];
