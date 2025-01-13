@@ -2,7 +2,7 @@
 #include<vector>
 #include<unordered_map>
 #include<algorithm>
-
+#include <string>
 using namespace std;
 /*
 c++ 11 ÀÌÈÄ modern cpp 
@@ -110,5 +110,10 @@ int main() {
 			p.second = 7654321;
 		}
 	}
+
+	string str;
+
+
+
 	return 0;
 }

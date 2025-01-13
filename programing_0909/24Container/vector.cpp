@@ -26,17 +26,11 @@ size : 실제 들어가는 사이즈
 캐패시터와 사이즈가 동일할때 해당 위치를 new delete로 복사하기때문에
 */
 
-
-
-
-
-
-
-
+#include"vector_Iter.h"
 
 int main() {
 
-	vector<int> v;
+	Vector<int> v;
 	
 	//v.reserve(1000); //capacity를 미리 1000 사이즈는 1부터
 	//v.resize(1000,-1); // size까지 미리 1000
@@ -50,10 +44,14 @@ int main() {
 		cout << endl;
 	}
 
-	v.shrink_to_fit(); //capacity와 size를 맞춰줌
+	//v.shrink_to_fit(); //capacity와 size를 맞춰줌
 
 
-
+	Vector<int>::Iterator iter = v.begin();
+	for (iter; iter != v.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
 
 
 
