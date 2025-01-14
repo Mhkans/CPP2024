@@ -111,7 +111,7 @@ int main() {
 		cout << *Iter << " ";
 	}
 	cout << endl;
-	//8.각 v의 원소에 3을 곱해주세요 replace
+	//8.각 v의 원소에 3을 곱해주세요 replace , for_each
 	cout << "- - - - -- - - - -- - - - - - -- ---" << endl;
 
 	for (int i = 0; i < v.size(); i++) {
@@ -120,6 +120,7 @@ int main() {
 	for (auto Iter = v.begin(); Iter != v.end(); Iter++) {
 		cout << *Iter << " ";
 	}
+
 	cout << endl;
 	//9.v를 정렬해주세요 sort
 	cout << "- - - - -- - - - -- - - - - - -- ---" << endl;
@@ -168,6 +169,23 @@ int main() {
 	}
 	cout << endl;
 	cout << "- - - - -- - - - -- - - - - - -- ---" << endl;
-	return 0;
+	
 
+	for (auto Iter = v.begin(); Iter != v.end();) {
+		if (*Iter == 57) {
+			Iter = v.erase(Iter);
+		}
+		else {
+			Iter++;
+		}
+	}
+	cout << "- - - - -- - - - -- - - - - - -- ---" << endl;
+
+	for (auto Iter = v.begin(); Iter != v.end(); Iter++) {
+		cout << *Iter << " ";
+	}
+	cout << endl;
+
+
+	return 0;
 }
