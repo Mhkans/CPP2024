@@ -14,15 +14,18 @@
 #include <memory.h>
 #include <tchar.h>
 
-#include<vector>
-#include<unordered_map>
-#include<algorithm>
-#include<string>
-#include<wrl/client.h>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <string>
+#include <memory>
+#include <wrl/client.h>
 
-#include<d3d11.h>
-#include<d3dcompiler.h>
-#include<DirectXMath.h>
+#include <d3d11.h>
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
+
+#include "../DirectXTex/DirectXTex.h"
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"d3dcompiler.lib")
@@ -30,15 +33,34 @@
 using namespace std;
 using namespace DirectX;
 
-//프로젝트 참조
-#include"../DirectXTex/DirectXTex.h"
+// Framework
+#include "Core/Device.h"
+#include "Core/Render/VertexLayout.h"
+#include "Core/Render/VertexBuffer.h"
+#include "Core/Render/VertexShader.h"
+#include "Core/Render/PixelShader.h"
+#include "Core/Texture/SamplerState.h"
+#include "Core/Texture/ShaderResourceView.h"
 
+// Matrix
+#include "Core/Render/ConstantBuffer.h"
+#include "Core/Render/BufferLayOut.h"
 
-//정적 라이브러리 A에서 B에 있는 함수들을 쓰고 싶다. 어지간하면 고치면 안될때
-//B를 정적 라이브러리로 만든다
-//B를 실행시켜서 빌드파일을 만들고 A에게 전달해준다 
-//.lib <- 정적 라이브러리
+// Bagic Obj
+#include "Contents/Quad.h"
 
-//동적 라이브러리 A에서 B에 있는 함수들을 쓰고 싶다. 에러가 있거나 소스를 바꿀 여지가 있다
-//B를 동적라이브러리로 만들면 .dll 이 나온다
-//실행할때 같이 실행된다
+// Scene
+#include "Scene/Scene.h"
+
+// Program
+#include "Program/Program.h"
+
+extern HWND hWnd;
+
+// Macro
+#define DEVICE  Device::Instance()->GetDevice()
+#define DC		Device::Instance()->GetDC()
+#define RTV		Device::Instance()->GetRTV()
+
+#define WIN_WIDTH	 1200
+#define WIN_HEIGHT	 720
