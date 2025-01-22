@@ -12,8 +12,8 @@ Quad::Quad(wstring path)
     _samplerState = make_shared<SamplerState>();
     _srv = make_shared<ShaderResourceView>(path);
 
-    _angle = 0.0f;
-    _world = make_shared<MatrixBuffer>();
+    _transform = make_shared<Transform>();
+    
 }
 
 Quad::~Quad()
@@ -22,16 +22,8 @@ Quad::~Quad()
 
 void Quad::Update()
 {
-    _angle += _addAngle;
+    _transform->Update();
 
-    XMMATRIX S = XMMatrixScaling(_scale.x, _scale.y, 1);
-    XMMATRIX R = XMMatrixRotationZ(_angle);
-    XMMATRIX T = XMMatrixTranslation(_pos.x, _pos.y, 0);
-
-    XMMATRIX srtMatrix = S * R * T;
-
-    _world->SetData(srtMatrix);
-    _world->Update();
 }
 
 void Quad::Render()
@@ -42,7 +34,7 @@ void Quad::Render()
     _srv->PSSet(0);
     _samplerState->PSSet(0);
 
-    _world->SetVSBuffer(0);
+    _transform->SetVSSlot(0);
 
     _vs->SetShader();
     _ps->SetShader();

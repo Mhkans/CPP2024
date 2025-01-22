@@ -13,7 +13,7 @@ private:
 	//shared_ptr<PixelShader> _ps; 
 	//shared_ptr<SamplerState> _samplerState;
 	//shared_ptr<ShaderResourceView> _srv;
-	shared_ptr<Quad> _quad1;
-	shared_ptr<Quad> _quad2;
+	shared_ptr<Quad> _quad;
+
 };
 

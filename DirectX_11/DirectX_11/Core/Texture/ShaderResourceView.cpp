@@ -9,6 +9,7 @@ ShaderResourceView::ShaderResourceView(wstring file)
     CreateShaderResourceView(DEVICE.Get(), image.GetImages(), image.GetImageCount(), image.GetMetadata(),
         IN _srv.ReleaseAndGetAddressOf());
 
+    
 }
 
 ShaderResourceView::~ShaderResourceView()

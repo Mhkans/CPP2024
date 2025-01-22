@@ -9,9 +9,7 @@ public:
 	void Update();
 	void Render();
 
-	void SetScale(XMFLOAT2 scale) { _scale = scale; }
-	void SetAngle(float addAngle) { _addAngle = addAngle; }
-	void SetPos(XMFLOAT2 pos) { _pos = pos; }
+	shared_ptr<Transform> GetTransform() { return _transform; }
 
 
 private:
@@ -24,11 +22,8 @@ private:
 	shared_ptr<PixelShader> _ps;
 	shared_ptr<SamplerState> _samplerState;
 	shared_ptr<ShaderResourceView> _srv;
-
-	XMFLOAT2		 _scale; // S
-	float			 _angle; // R
-	float			 _addAngle;
-	XMFLOAT2		 _pos;   // Translate
-	shared_ptr<MatrixBuffer> _world;
+	//Transform 
+	shared_ptr<Transform> _transform; //월드에 존재하기 위한 필요조건
+	
 };
 

@@ -66,6 +66,15 @@
     <ClInclude Include="Core\Render\BufferLayOut.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Transform.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SolarSystemScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX_11.cpp">
@@ -110,6 +119,12 @@
     <ClCompile Include="Core\Render\ConstantBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Transform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SolarSystemScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_11.rc">
@@ -127,6 +142,15 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\SCS2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\earth.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\moon.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\sun.png">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

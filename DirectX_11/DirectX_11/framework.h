@@ -42,6 +42,10 @@ using namespace DirectX;
 #include "Core/Texture/SamplerState.h"
 #include "Core/Texture/ShaderResourceView.h"
 
+//Math
+#include"Math/Vector.h"
+#include"Math/Transform.h"
+
 // Matrix
 #include "Core/Render/ConstantBuffer.h"
 #include "Core/Render/BufferLayOut.h"
@@ -64,3 +68,4 @@ extern HWND hWnd;
 
 #define WIN_WIDTH	 1200
 #define WIN_HEIGHT	 720
+#define CENTER Vector(WIN_WIDTH * 0.5f,WIN_HEIGHT * 0.5f)

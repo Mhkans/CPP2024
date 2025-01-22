@@ -139,17 +139,20 @@
     <ClInclude Include="DirectX_11.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Core\Render\PixelShader.h" />
+    <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Contents\Quad.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Core\Texture\SamplerState.h" />
     <ClInclude Include="Core\Texture\ShaderResourceView.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SolarSystemScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Render\VertexBuffer.h" />
     <ClInclude Include="Core\Render\VertexLayout.h" />
     <ClInclude Include="Core\Render\VertexShader.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
+    <ClInclude Include="Math\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Render\ConstantBuffer.cpp" />
@@ -168,14 +171,19 @@
     <ClCompile Include="Contents\Quad.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\TutorialScene.cpp" />
+    <ClCompile Include="Scene\SolarSystemScene.cpp" />
+    <ClCompile Include="Math\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectX_11.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX_11.ico" />
+    <Image Include="Resource\earth.png" />
+    <Image Include="Resource\moon.png" />
     <Image Include="Resource\SCS.png" />
     <Image Include="Resource\SCS2.png" />
+    <Image Include="Resource\sun.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
