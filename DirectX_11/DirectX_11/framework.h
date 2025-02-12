@@ -34,12 +34,16 @@ using namespace std;
 using namespace DirectX;
 
 // Framework
+#include"GMacro.h"
 #include "Core/Device.h"
 #include "Core/Render/VertexLayout.h"
 #include "Core/Render/VertexBuffer.h"
+#include "Core/Render/IndexBuffer.h"
 #include "Core/Render/VertexShader.h"
 #include "Core/Render/PixelShader.h"
 #include "Core/Texture/SamplerState.h"
+#include "Core/Texture/BlendState.h"
+#include "Core/Texture/StateManager.h"
 #include "Core/Texture/ShaderResourceView.h"
 
 //Math
@@ -49,6 +53,12 @@ using namespace DirectX;
 // Matrix
 #include "Core/Render/ConstantBuffer.h"
 #include "Core/Render/BufferLayOut.h"
+
+//Utility
+#include"Utility/InputManager.h"
+//Collider
+#include"Math/Collider/RectCollider.h"
+#include"Math/Collider/CircleCollider.h"
 
 // Bagic Obj
 #include "Contents/Quad.h"
@@ -60,12 +70,4 @@ using namespace DirectX;
 #include "Program/Program.h"
 
 extern HWND hWnd;
-
-// Macro
-#define DEVICE  Device::Instance()->GetDevice()
-#define DC		Device::Instance()->GetDC()
-#define RTV		Device::Instance()->GetRTV()
-
-#define WIN_WIDTH	 1200
-#define WIN_HEIGHT	 720
-#define CENTER Vector(WIN_WIDTH * 0.5f,WIN_HEIGHT * 0.5f)
+extern Vector mousePos;

@@ -11,19 +11,20 @@ public:
 
 	shared_ptr<Transform> GetTransform() { return _transform; }
 
-
 private:
 	void CreateVertices();
-	vector<Vertex_Texture> vertices;
+	vector<Vertex_Texture>	 _vertices;
+	vector<UINT>			 _indices;
 
 	shared_ptr<VertexBuffer> _vertexBuffer;
+	shared_ptr<IndexBuffer> _indexBuffer;
 
 	shared_ptr<VertexShader> _vs;
 	shared_ptr<PixelShader> _ps;
-	shared_ptr<SamplerState> _samplerState;
 	shared_ptr<ShaderResourceView> _srv;
-	//Transform 
-	shared_ptr<Transform> _transform; //월드에 존재하기 위한 필요조건
-	
+
+	// Transform
+	shared_ptr<Transform> _transform; // <= 월드에 존재하기 위한 필요조건
+
 };
 

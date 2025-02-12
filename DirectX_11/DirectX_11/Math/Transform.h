@@ -7,21 +7,24 @@ public:
 
 	void Update();
 	void SetVSSlot(int slot);
+	//정보를 cpu가 주지않고 렌더하니까 행렬에 곱셈이되지않는 문제 예방 
+	void SetLocalLocation(Vector pos) { _pos = pos; Update(); } // 행렬을 고쳤으니 업데이트
+	Vector GetLocalLocation() { return _pos; }
+	void AddLocalLocation(Vector value) { _pos += value; }
 
-	void SetLocation(Vector pos) { _pos = pos; }
-	Vector GetLocation() { return _pos; }
-	void AddLocation(Vector value) { _pos += value; }
+	Vector GetWorldLocation();
 
-	void SetScale(Vector scale) { _scale = scale; }
+
+	void SetScale(Vector scale) { _scale = scale; Update();}
 	Vector GetScale() { return _scale; }
 	void AddScale(Vector value) { _scale += value; }
 
 
-	void SetAngle(float angle) { _angle = angle; }
+	void SetAngle(float angle) { _angle = angle; Update();}
 	float GetAngle() { return _angle; }
 	void AddAngle(float value) { _angle += value; }
 
-	void SetParent(shared_ptr<Transform> parent) { _parent = parent; }
+	void SetParent(shared_ptr<Transform> parent) { _parent = parent; Update();}
 
 	XMMATRIX GetMatrix() { return _srtMatrix; }
 private:

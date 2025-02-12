@@ -49,7 +49,7 @@ public:
     {
         return Vector(x * value, y * value);
     }
-    Vector NormalVector() const
+    Vector Normalize() const
     {
         float length = Length();
 
@@ -90,7 +90,7 @@ public:
         return !this->operator==(other);
     }
 
-    void Normalize()
+    void Normal()
     {
         float length = Length();
 

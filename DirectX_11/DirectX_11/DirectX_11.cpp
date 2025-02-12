@@ -46,9 +46,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 생성
     Device::Create();
-
+    StateManager::Create();
     shared_ptr<Program> program = make_shared<Program>();
-
+    InputManager::Create();
     MSG msg = {};
 
     while (msg.message != WM_QUIT)
@@ -71,7 +71,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     Device::Delete();
-
+    InputManager::Delete();
     return (int)msg.wParam;
 }
 
@@ -114,10 +114,11 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
-
+    RECT rc = { 0,0,WIN_WIDTH,WIN_HEIGHT };
+    
+    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
     hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        0, 0, WIN_WIDTH, WIN_HEIGHT, nullptr, nullptr, hInstance, nullptr);
-
+        0, 0, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, nullptr);
     if (!hWnd)
     {
         return FALSE;
@@ -126,6 +127,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
+    SetMenu(hWnd, nullptr);
     return TRUE;
 }
 
@@ -139,6 +141,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+Vector mousePos;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -160,7 +163,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
     }
     break;
-
+    case WM_MOUSEMOVE: 
+    {
+        mousePos.x = static_cast<float>(LOWORD(lParam));
+        mousePos.y = WIN_HEIGHT - static_cast<float>(HIWORD(lParam));
+        break;
+    }
     case WM_PAINT:
     {
         PAINTSTRUCT ps;

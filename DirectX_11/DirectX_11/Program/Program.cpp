@@ -3,10 +3,11 @@
 
 #include "Scene/TutorialScene.h"
 #include "Scene/SolarSystemScene.h"
-
+#include "Scene/BowScene.h"
+#include "Scene/CollisionScene.h"
 Program::Program()
 {
-    _scene = make_shared<SolarSystemScene>();
+    _scene = make_shared<CollisionScene>();
 
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();
@@ -21,6 +22,7 @@ Program::~Program()
 
 void Program::Update()
 {
+    InputManager::GetInstance()->Update();
     _view->Update();
     _projection->Update();
 
@@ -42,6 +44,8 @@ void Program::Render()
     _projection->SetVSBuffer(2);
 
     DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    ALPHA->SetState();
+
     _scene->Render();
 
     Device::Instance()->GetSwapChain()->Present(0, 0);
