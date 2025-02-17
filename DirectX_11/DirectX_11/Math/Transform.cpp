@@ -43,3 +43,12 @@ Vector Transform::GetWorldLocation()
     float y = _srtMatrix.r[3].m128_f32[1];
     return Vector(x,y);
 }
+
+Vector Transform::GetWorldScale()
+{
+    if (_parent.expired()) {
+        return _scale;
+    }
+    Vector parentSclae = _parent.lock()->GetWorldScale();
+    return Vector(_scale.x * parentSclae.x , _scale.y * parentSclae.y);
+}

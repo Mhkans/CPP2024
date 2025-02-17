@@ -27,6 +27,8 @@ public:
 	void SetParent(shared_ptr<Transform> parent) { _parent = parent; Update();}
 
 	XMMATRIX GetMatrix() { return _srtMatrix; }
+
+	Vector GetWorldScale();
 private:
 	weak_ptr<Transform> _parent;
 	XMMATRIX _srtMatrix;

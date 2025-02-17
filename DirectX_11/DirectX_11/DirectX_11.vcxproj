@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Math\Collider\Collider.h" />
     <ClInclude Include="Scene\CollisionScene.h" />
     <ClInclude Include="Math\Collider\CircleCollider.h" />
     <ClInclude Include="Contents\BowScene\Arrow.h" />
@@ -163,9 +164,11 @@
     <ClInclude Include="Core\Render\VertexShader.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="Math\Transform.h" />
+    <ClInclude Include="Utility\TimeManager.h" />
     <ClInclude Include="Utility\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Math\Collider\Collider.cpp" />
     <ClCompile Include="Scene\CollisionScene.cpp" />
     <ClCompile Include="Math\Collider\CircleCollider.cpp" />
     <ClCompile Include="Contents\BowScene\Arrow.cpp" />
@@ -193,6 +196,7 @@
     <ClCompile Include="Scene\SolarSystemScene.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
+    <ClCompile Include="Utility\TimeManager.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>

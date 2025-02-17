@@ -4,6 +4,9 @@
 Arrow::Arrow()
 {
 	_arrow = make_shared<Quad>(L"Resource/Bullet.png");
+	_collider = make_shared<CircleCollider>(Vector(20, 0), 20);
+
+	_collider->GetTransform()->SetParent(_arrow->GetTransform());
 }
 
 Arrow::~Arrow()
@@ -12,12 +15,13 @@ Arrow::~Arrow()
 
 void Arrow::Update()
 {
+	_collider->Update();
+	_arrow->Update();
 
 	if(!isActive){
 		_arrow->GetTransform()->SetLocalLocation(Vector(-5000, -5000));
 		return;
 	}
-	_arrow->Update();
 
 	if (_arrow->GetTransform()->GetWorldLocation().x <0 ||
 		_arrow->GetTransform()->GetWorldLocation().x > WIN_WIDTH ||
@@ -27,7 +31,7 @@ void Arrow::Update()
 		isActive = false;
 	}
 	
-	_arrow->GetTransform()->AddLocalLocation(Vector(cosf(_angle) , sinf(_angle)) * _arrowSpeed);
+	_arrow->GetTransform()->AddLocalLocation(Vector(cosf(_angle) , sinf(_angle)) * _arrowSpeed * DELTA_TIME);
 }
 
 void Arrow::Render()
@@ -37,5 +41,13 @@ void Arrow::Render()
 		return;
 	}
 	_arrow->Render();
+}
+
+void Arrow::PostRender()
+{
+	if (!isActive) {
+		return;
+	}
+	_collider->Render();
 }
 

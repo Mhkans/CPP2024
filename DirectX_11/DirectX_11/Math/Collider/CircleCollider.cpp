@@ -1,9 +1,11 @@
 #include "framework.h"
 #include "CircleCollider.h"
 #include "RectCollider.h"
+#include "Collider.h"
 CircleCollider::CircleCollider(Vector center, float radius)
     :_radius(radius)
 {
+    _currType = Collider::Type::CIRCLE;
     CreateVertices();
     _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), _vertices.size(), sizeof(Vertex));
     _vs = make_shared<VertexShader>(L"Shader/ColliderVertexShader.hlsl");
@@ -24,7 +26,7 @@ void CircleCollider::Update()
 {
     _transform->Update();
 
-     _colorBuffer->Update();
+    _colorBuffer->Update();
 }
 
 void CircleCollider::Render()
@@ -49,13 +51,13 @@ bool CircleCollider::IsCollision(const Vector& pos)
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> rect)
 {
-    return rect->IsCollision(shared_from_this());
+    return rect->IsCollision(dynamic_pointer_cast<CircleCollider>(shared_from_this()));
 }
 bool CircleCollider::IsCollision(shared_ptr<CircleCollider> circle)
 {
-    float length1 = (Center() - circle->GetTransform()->GetWorldLocation()).Length();
-    float length2 = _radius + circle->Radius();
-    return length1 <= length2;
+    float length1 = (_transform->GetWorldLocation() - circle->GetTransform()->GetWorldLocation()).Length();
+    float length2 = Radius() + circle->Radius();
+    return length1 < length2;
 }
 void CircleCollider::CreateVertices()
 {

@@ -1,41 +1,22 @@
 #pragma once
-class CircleCollider :public enable_shared_from_this<CircleCollider>
+#include "Collider.h"
+class CircleCollider :public Collider
 {
 public:
 	CircleCollider(Vector center, float radius);
 	~CircleCollider();
 
-	void Update();
-	void Render();
+	void Update() override;
+	void Render() override;
 
-	shared_ptr<Transform> GetTransform() { return _transform; }
+	bool IsCollision(const Vector& pos)override; //점충돌
+	bool IsCollision(shared_ptr<class RectCollider> rect)override;
+	bool IsCollision(shared_ptr<class CircleCollider> circle)override;
 
-	void SetRed() { _colorBuffer->SetData(XMFLOAT4(1, 0, 0, 1)); }
-	void SetGreen() { _colorBuffer->SetData(XMFLOAT4(0, 1, 0, 1)); }
-
-	float Radius() { return _radius * _transform->GetScale().x; }
-
-	Vector Center() { return _transform->GetWorldLocation(); }
-	bool IsCollision(const Vector& pos); //점충돌
-	bool IsCollision(shared_ptr<class RectCollider> rect);
-	bool IsCollision(shared_ptr<class CircleCollider> circle);
-private:
-	void CreateVertices();
-	vector<Vertex>	 _vertices;
-	vector<UINT>			 _indices;
-
-	shared_ptr<VertexBuffer> _vertexBuffer;
-	shared_ptr<IndexBuffer> _indexBuffer;
-
-	shared_ptr<VertexShader> _vs;
-	shared_ptr<PixelShader> _ps;
-
-	shared_ptr<Transform> _transform;
-	shared_ptr<ColorBuffer> _colorBuffer;
-
-	float _radius;
-	Vector scale;
-
+	float Radius() { return _radius * _transform->GetWorldScale().x; }
+protected:
+	void CreateVertices() override;
+	float _radius;	
 	int vCount = 37;
 	float angle = 2 * PI / vCount;
 };

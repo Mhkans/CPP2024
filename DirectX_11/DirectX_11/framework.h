@@ -56,9 +56,12 @@ using namespace DirectX;
 
 //Utility
 #include"Utility/InputManager.h"
+#include"Utility/TimeManager.h"
+
 //Collider
 #include"Math/Collider/RectCollider.h"
 #include"Math/Collider/CircleCollider.h"
+#include"Math/Collider/Collider.h"
 
 // Bagic Obj
 #include "Contents/Quad.h"
