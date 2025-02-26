@@ -133,13 +133,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Contents\Action.h" />
+    <ClInclude Include="Contents\BowScene\Player.h" />
+    <ClInclude Include="Contents\BowScene\Bow_Monster.h" />
+    <ClInclude Include="Contents\Effect\Effect.h" />
+    <ClInclude Include="Contents\UI\HpBar.h" />
+    <ClInclude Include="Scene\DungreedScene.h" />
     <ClInclude Include="Math\Collider\Collider.h" />
     <ClInclude Include="Scene\CollisionScene.h" />
     <ClInclude Include="Math\Collider\CircleCollider.h" />
     <ClInclude Include="Contents\BowScene\Arrow.h" />
     <ClInclude Include="Contents\BowScene\Bow.h" />
     <ClInclude Include="Math\Collider\RectCollider.h" />
-    <ClInclude Include="Scene\BowScene.h" />
     <ClInclude Include="Core\Texture\BlendState.h" />
     <ClInclude Include="Core\Render\ConstantBuffer.h" />
     <ClInclude Include="Core\Device.h" />
@@ -158,23 +163,31 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SolarSystemScene.h" />
     <ClInclude Include="Core\Texture\StateManager.h" />
+    <ClInclude Include="Core\Texture\SRVManager.h" />
+    <ClInclude Include="Contents\Sprite.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Core\Render\VertexBuffer.h" />
     <ClInclude Include="Core\Render\VertexLayout.h" />
     <ClInclude Include="Core\Render\VertexShader.h" />
     <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="Math\Transform.h" />
+    <ClInclude Include="Contents\BowScene\Map\Track.h" />
     <ClInclude Include="Utility\TimeManager.h" />
     <ClInclude Include="Utility\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Contents\Action.cpp" />
+    <ClCompile Include="Contents\BowScene\Player.cpp" />
+    <ClCompile Include="Contents\BowScene\Bow_Monster.cpp" />
+    <ClCompile Include="Contents\Effect\Effect.cpp" />
+    <ClCompile Include="Contents\UI\HpBar.cpp" />
+    <ClCompile Include="Scene\DungreedScene.cpp" />
     <ClCompile Include="Math\Collider\Collider.cpp" />
     <ClCompile Include="Scene\CollisionScene.cpp" />
     <ClCompile Include="Math\Collider\CircleCollider.cpp" />
     <ClCompile Include="Contents\BowScene\Arrow.cpp" />
     <ClCompile Include="Contents\BowScene\Bow.cpp" />
     <ClCompile Include="Math\Collider\RectCollider.cpp" />
-    <ClCompile Include="Scene\BowScene.cpp" />
     <ClCompile Include="Core\Texture\BlendState.cpp" />
     <ClCompile Include="Core\Render\ConstantBuffer.cpp" />
     <ClCompile Include="Core\Device.cpp" />
@@ -196,6 +209,9 @@
     <ClCompile Include="Scene\SolarSystemScene.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Core\Texture\StateManager.cpp" />
+    <ClCompile Include="Contents\BowScene\Map\Track.cpp" />
+    <ClCompile Include="Core\Texture\SRVManager.cpp" />
+    <ClCompile Include="Contents\Sprite.cpp" />
     <ClCompile Include="Utility\TimeManager.cpp" />
     <ClCompile Include="Utility\InputManager.cpp" />
   </ItemGroup>
@@ -204,14 +220,33 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DirectX_11.ico" />
+    <Image Include="Resource\bg.png" />
+    <Image Include="Resource\BlueExplosion.png" />
     <Image Include="Resource\Bow.png" />
     <Image Include="Resource\Bullet.png" />
+    <Image Include="Resource\UI\Button.png" />
     <Image Include="Resource\earth.png" />
+    <Image Include="Resource\Effects\BlueExplosion.png" />
+    <Image Include="Resource\Effects\explosion.png" />
+    <Image Include="Resource\Effects\fire_8x2.png" />
+    <Image Include="Resource\Effects\GreenExplosion.png" />
+    <Image Include="Resource\Effects\hit2_4x4.png" />
+    <Image Include="Resource\Effects\hit_4x2.png" />
+    <Image Include="Resource\Effects\smoke_4x4.png" />
+    <Image Include="Resource\explosion.png" />
+    <Image Include="Resource\fire_8x2.png" />
+    <Image Include="Resource\GreenExplosion.png" />
+    <Image Include="Resource\UI\Grey.png" />
+    <Image Include="Resource\hit2_4x4.png" />
+    <Image Include="Resource\hit_4x2.png" />
     <Image Include="Resource\monster.png" />
     <Image Include="Resource\moon.png" />
+    <Image Include="Resource\Player.png" />
     <Image Include="Resource\SCS.png" />
     <Image Include="Resource\SCS2.png" />
+    <Image Include="Resource\smoke_4x4.png" />
     <Image Include="Resource\sun.png" />
+    <Image Include="Resource\Track.png" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +265,14 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shader\SpritePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\TexturePixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

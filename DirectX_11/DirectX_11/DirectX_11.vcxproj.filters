@@ -87,9 +87,6 @@
     <ClInclude Include="Core\Render\IndexBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\BowScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Contents\BowScene\Bow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -112,6 +109,33 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Utility\TimeManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\BowScene\Bow_Monster.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\BowScene\Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\DungreedScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\BowScene\Map\Track.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Texture\SRVManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Sprite.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Action.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\Effect\Effect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Contents\UI\HpBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -173,9 +197,6 @@
     <ClCompile Include="Core\Render\IndexBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\BowScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Contents\BowScene\Bow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -198,6 +219,33 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Utility\TimeManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\BowScene\Bow_Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\BowScene\Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\DungreedScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\BowScene\Map\Track.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Texture\SRVManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Sprite.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Action.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\Effect\Effect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Contents\UI\HpBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -237,6 +285,63 @@
     <Image Include="Resource\monster.png">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="Resource\Player.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\bg.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Track.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\BlueExplosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\explosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\fire_8x2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\GreenExplosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\hit_4x2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\hit2_4x4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\smoke_4x4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\BlueExplosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\explosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\fire_8x2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\GreenExplosion.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\hit_4x2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\hit2_4x4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\Effects\smoke_4x4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\UI\Button.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\UI\Grey.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\TutorialShader.hlsl" />
@@ -244,5 +349,6 @@
     <FxCompile Include="Shader\TexturePixelShader.hlsl" />
     <FxCompile Include="Shader\ColliderVertexShader.hlsl" />
     <FxCompile Include="Shader\ColliderPixelShader.hlsl" />
+    <FxCompile Include="Shader\SpritePixelShader.hlsl" />
   </ItemGroup>
 </Project>

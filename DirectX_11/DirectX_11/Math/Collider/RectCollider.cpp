@@ -148,6 +148,40 @@ bool RectCollider::IsCollision(shared_ptr<RectCollider> rect)
 }
 
 
+int RectCollider::Block(shared_ptr<RectCollider> other)
+{
+    if (!IsCollision(other)) {
+        return -1;
+    }
+    OBB a = GetOBB();
+    OBB b = other->GetOBB();
+
+    Vector gap;
+    gap.x = (a.length[0] + b.length[0]) - abs(a.position.x - b.position.x) + 0.001f;
+    gap.y = (a.length[1] + b.length[1]) - abs(a.position.y - b.position.y) + 0.001f;
+
+    //상속된 collider에 Block X
+    if (gap.x > gap.y){
+        if (b.position.y < a.position.y){
+            other->GetTransform()->AddLocalLocation(Vector(0, -gap.y));
+            return 0;
+        }
+        else{
+            other->GetTransform()->AddLocalLocation(Vector(0, gap.y));
+            return 1;
+        }
+    }
+    // gap의 x 값이 더 작음
+    if (b.position.x < a.position.x){
+        other->GetTransform()->AddLocalLocation(Vector(-gap.x, 0));
+    }
+    else{
+        other->GetTransform()->AddLocalLocation(Vector(gap.x, 0));
+    }
+
+    return 0;
+}
+
 void RectCollider::CreateVertices()
 {
     Vertex temp;

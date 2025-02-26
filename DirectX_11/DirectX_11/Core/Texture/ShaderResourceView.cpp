@@ -21,3 +21,14 @@ void ShaderResourceView::PSSet(int slot)
 {
     DC->PSSetShaderResources(slot, 1, _srv.GetAddressOf());
 }
+
+Vector ShaderResourceView::GetSize()
+{
+    if (image.GetImageCount() == 0) {
+        return Vector(0, 0);
+    }
+    float x = image.GetMetadata().width;
+    float y = image.GetMetadata().height;
+
+    return Vector(x,y);
+}

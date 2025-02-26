@@ -3,16 +3,30 @@
 
 Quad::Quad(wstring path)
 {
-    CreateVertices();
-
-    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), _vertices.size(), sizeof(Vertex_Texture));
-    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
-
     _vs = make_shared<VertexShader>(L"Shader/TextureVertexShader.hlsl");
     _ps = make_shared<PixelShader>(L"Shader/TexturePixelShader.hlsl");
-    _srv = make_shared<ShaderResourceView>(path);
+    _srvPath = path;
+    ADD_SRV(_srvPath);
+    _halfSize = ImageSize() * 0.5f;
+    CreateVertices();
 
     _transform = make_shared<Transform>();
+    _flipBuffer = make_shared<FlipBuffer>();
+    
+}
+
+Quad::Quad(wstring path, Vector size)
+{
+    _vs = make_shared<VertexShader>(L"Shader/TextureVertexShader.hlsl");
+    _ps = make_shared<PixelShader>(L"Shader/TexturePixelShader.hlsl");
+    _srvPath = path;
+    ADD_SRV(_srvPath);
+    _halfSize = size * 0.5f;
+    CreateVertices();
+
+    _transform = make_shared<Transform>();
+    _flipBuffer = make_shared<FlipBuffer>();
+
 }
 
 Quad::~Quad()
@@ -22,6 +36,7 @@ Quad::~Quad()
 void Quad::Update()
 {
     _transform->Update();
+    _flipBuffer->Update();
 }
 
 void Quad::Render()
@@ -30,10 +45,11 @@ void Quad::Render()
     _vertexBuffer->SetVertexBuffer(0);
     _indexBuffer->IASetIndexBuffer();
 
-    _srv->PSSet(0);
+    ADD_SRV(_srvPath)->PSSet(0);
     SAMPLER->PSSet(0);
 
     _transform->SetVSSlot(0);
+    _flipBuffer->SetPSBuffer(0);
 
     _vs->SetShader();
     _ps->SetShader();
@@ -41,22 +57,31 @@ void Quad::Render()
     DC->DrawIndexed(_indices.size(), 0, 0);
 }
 
+Vector Quad::ImageSize()
+{
+    return ADD_SRV(_srvPath)->GetSize();
+}
+
 void Quad::CreateVertices()
 {
+    _indices.clear();
+    _vertices.clear();
+    
+
     Vertex_Texture temp;
-    temp.pos = XMFLOAT3(-50.0f, 50.0f, 0.0f);
+    temp.pos = XMFLOAT3(-_halfSize.x, _halfSize.y, 0.0f);
     temp.uv = XMFLOAT2(0, 0);
     _vertices.push_back(temp); // 왼쪽 위
 
-    temp.pos = XMFLOAT3(50.0f, -50.0f, 0.0f);
+    temp.pos = XMFLOAT3(_halfSize.x, -_halfSize.y, 0.0f);
     temp.uv = XMFLOAT2(1, 1);
     _vertices.push_back(temp); // 오른쪽 아래
 
-    temp.pos = XMFLOAT3(-50.0f, -50.0f, 0.0f);
+    temp.pos = XMFLOAT3(-_halfSize.x, -_halfSize.y, 0.0f);
     temp.uv = XMFLOAT2(0, 1);
     _vertices.push_back(temp); // 왼쪽 아래
 
-    temp.pos = XMFLOAT3(50.0f, 50.0f, 0.0f);
+    temp.pos = XMFLOAT3(_halfSize.x, _halfSize.y, 0.0f);
     temp.uv = XMFLOAT2(1, 0);
     _vertices.push_back(temp); // 오른쪽 위
 
@@ -67,4 +92,9 @@ void Quad::CreateVertices()
     _indices.push_back(0);
     _indices.push_back(1);
     _indices.push_back(2);
+
+    _vertexBuffer = make_shared<VertexBuffer>(_vertices.data(), _vertices.size(), sizeof(Vertex_Texture));
+    _indexBuffer = make_shared<IndexBuffer>(_indices.data(), _indices.size());
+
+
 }

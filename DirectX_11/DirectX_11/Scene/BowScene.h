@@ -16,12 +16,14 @@ public:
 private:
 	shared_ptr<class Bow> _bow;
 	vector<shared_ptr<class Arrow>> _arrows;
+	shared_ptr<class Bow_Monster> _monster;
+
 	shared_ptr<Transform> _tip;
 
 	int _arrowCount = 10;
 	float angle;
 
-	const float _delay = 1.0f;
+	const float _delay = 0.5f;
 	float _deltaTime = 0.0f;
 };
 

@@ -32,6 +32,9 @@
 
 using namespace std;
 using namespace DirectX;
+//Math
+#include"Math/Vector.h"
+#include"Math/Transform.h"
 
 // Framework
 #include"GMacro.h"
@@ -45,10 +48,7 @@ using namespace DirectX;
 #include "Core/Texture/BlendState.h"
 #include "Core/Texture/StateManager.h"
 #include "Core/Texture/ShaderResourceView.h"
-
-//Math
-#include"Math/Vector.h"
-#include"Math/Transform.h"
+#include"Core/Texture/SRVManager.h"
 
 // Matrix
 #include "Core/Render/ConstantBuffer.h"
@@ -65,7 +65,10 @@ using namespace DirectX;
 
 // Bagic Obj
 #include "Contents/Quad.h"
+#include "Contents/Sprite.h"
 
+#include "Contents/Effect/Effect.h"
+#include "Contents/Action.h"
 // Scene
 #include "Scene/Scene.h"
 

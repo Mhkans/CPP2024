@@ -20,3 +20,5 @@
 
 #define DELTA_TIME TimeManager::Instance()->GetDeltaTime()
 #define RUN_TIME TimeManager::Instance()->GetRunTime()
+
+#define ADD_SRV(path) SRVManager::Instance()->AddSRV(path)

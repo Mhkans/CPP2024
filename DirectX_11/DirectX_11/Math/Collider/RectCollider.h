@@ -8,6 +8,7 @@ private:
 		Vector direction[2];
 		float length[2];
 	};
+	
 public:
 	RectCollider(Vector center, Vector size);
 	~RectCollider();
@@ -23,6 +24,8 @@ public:
 
 	Vector GetHalfSize() { return _halfSize; }
 	void SetHalfSize(Vector vec) { _halfSize = vec; }
+
+	int Block(shared_ptr<RectCollider> other);
 
 protected:
 	void CreateVertices() override;

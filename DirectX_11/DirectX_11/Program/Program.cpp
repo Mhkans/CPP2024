@@ -5,9 +5,10 @@
 #include "Scene/SolarSystemScene.h"
 #include "Scene/BowScene.h"
 #include "Scene/CollisionScene.h"
+#include "Scene/DungreedScene.h"
 Program::Program()
 {
-    _scene = make_shared<BowScene>();
+    _scene = make_shared<DungreedScene>();
 
     _view = make_shared<MatrixBuffer>();
     _projection = make_shared<MatrixBuffer>();
